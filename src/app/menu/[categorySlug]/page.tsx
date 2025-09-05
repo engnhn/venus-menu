@@ -12,11 +12,7 @@ const CAFE_SLUG = 'venus';
 
 async function getFullMenu(): Promise<MenuResponse | null> {
     try {
-        const h = await headers();
-        const proto = h.get("x-forwarded-proto") ?? "http";
-        const host = h.get("x-forwarded-host") ?? h.get("host");
-        const base =
-            process.env.NEXT_PUBLIC_SITE_URL ?? `${proto}://${host}`;
+        const base = "http://" + (await headers()).get("host");
 
         const res = await fetch(`${base}/api/v1/public/menus/${CAFE_SLUG}/menu`, {
             next: { revalidate: 3600 },
