@@ -13,7 +13,6 @@ import type { MenuResponse } from '@/types/menu';
 const googleReviewUrl = 'https://g.page/r/CbITFijjJDOYEBM/review';
 const wifiSsid = 'VENUS';
 const wifiPassword = 'venus.vefa';
-const apiUrl = "http://88.209.248.254:8081"
 
 async function getMenuData(slug: string): Promise<MenuResponse | null> {
     try {

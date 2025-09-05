@@ -8,6 +8,7 @@ export interface Product {
 export interface Category {
     name:string;
     products: Product[];
+    imageUrl: string | null;
 }
 
 export interface MenuResponse {
