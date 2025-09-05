@@ -12,11 +12,17 @@ const CAFE_SLUG = 'venus';
 
 async function getFullMenu(): Promise<MenuResponse | null> {
     try {
-        const base = "http://" + (await headers()).get("host");
+        const h = await headers();
+        const proto = h.get("x-forwarded-proto") ?? "http";
+        const host = h.get("x-forwarded-host") ?? h.get("host");
 
-        const res = await fetch(`${base}/api/v1/public/menus/${CAFE_SLUG}/menu`, {
-            next: { revalidate: 3600 },
-        });
+        // Prod’da .env’den ver; yoksa gelen isteğin origin’ini kullan
+        const base = process.env.NEXT_PUBLIC_SITE_URL ?? `${proto}://${host}`;
+
+        // Relative yerine ABSOLUTE URL: kendi siten + rewrite/proxy path
+        const url = `${base}/api/v1/public/menus/${CAFE_SLUG}/menu`;
+
+        const res = await fetch(url, { cache: "no-store" });
         if (!res.ok) {
             console.error(`API'den veri çekilemedi. Status: ${res.status}`);
             return null;
