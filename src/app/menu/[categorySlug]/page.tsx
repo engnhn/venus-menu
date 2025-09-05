@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
-
+import { headers } from "next/headers";
 import { Header } from '@/components/menu/Header';
 import { CategoryNavigation } from '@/components/menu/CategoryNavigation';
 import { ProductPreviewCard } from '@/components/products/ProductPreviewCard';
@@ -9,10 +9,16 @@ import { ExpandableProductCard } from '@/components/products/ExpandableProductCa
 import type { MenuResponse } from '@/types/menu';
 
 const CAFE_SLUG = 'venus';
-const apiUrl = "http://88.209.248.254:8081"
+
 async function getFullMenu(): Promise<MenuResponse | null> {
     try {
-        const res = await fetch(`/api/v1/public/menus/${CAFE_SLUG}/menu`, {
+        const h = await headers();
+        const proto = h.get("x-forwarded-proto") ?? "http";
+        const host = h.get("x-forwarded-host") ?? h.get("host");
+        const base =
+            process.env.NEXT_PUBLIC_SITE_URL ?? `${proto}://${host}`;
+
+        const res = await fetch(`${base}/api/v1/public/menus/${CAFE_SLUG}/menu`, {
             next: { revalidate: 3600 },
         });
         if (!res.ok) {
