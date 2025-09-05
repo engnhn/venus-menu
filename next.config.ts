@@ -43,6 +43,10 @@ const nextConfig: NextConfig = {
                 source: "/api/v1/:path*",
                 destination: "http://88.209.248.254:8081/api/v1/:path*",
             },
+            {
+                source: "/api/v1/:path*",
+                destination: "http://88.209.248.254:8081/api/v1/:path*",
+            },
         ];
     },
 };
