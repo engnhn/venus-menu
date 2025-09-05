@@ -12,7 +12,7 @@ const CAFE_SLUG = 'venus';
 const apiUrl = "http://88.209.248.254:8081"
 async function getFullMenu(): Promise<MenuResponse | null> {
     try {
-        const res = await fetch(`${apiUrl}/api/v1/public/menus/${CAFE_SLUG}/menu`, {
+        const res = await fetch(`/api/v1/public/menus/${CAFE_SLUG}/menu`, {
             next: { revalidate: 3600 },
         });
         if (!res.ok) {

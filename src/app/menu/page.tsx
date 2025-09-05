@@ -17,7 +17,7 @@ const apiUrl = "http://88.209.248.254:8081"
 
 async function getMenuData(slug: string): Promise<MenuResponse | null> {
     try {
-        const res = await fetch(`${apiUrl}/api/v1/public/menus/${slug}/menu`, {
+        const res = await fetch(`/api/v1/public/menus/${slug}/menu`, {
             cache: 'no-store',
         });
         if (!res.ok) {
