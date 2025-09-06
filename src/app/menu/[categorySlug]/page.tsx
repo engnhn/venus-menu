@@ -64,7 +64,7 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            <Header cafeName={menuData.cafeName} />
+            <Header />
 
             <CategoryNavigation categories={menuData.categories} currentCafeSlug={CAFE_SLUG} />
 
