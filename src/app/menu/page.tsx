@@ -53,7 +53,7 @@ export default function MenuPage() {
     if (!menuData || !menuData.categories) {
         return (
             <div className="bg-white text-zinc-800 min-h-screen flex flex-col">
-                <Header cafeName="Hata" />
+                <Header />
                 <main className="flex-grow flex items-center justify-center">
                     <p>Menü yüklenirken bir sorun oluştu.</p>
                 </main>
@@ -63,7 +63,7 @@ export default function MenuPage() {
 
     return (
         <div className="bg-white text-zinc-900 min-h-screen font-sans">
-            <Header cafeName={menuData.cafeName} />
+            <Header />
 
             <main className="p-4">
                 <CategoryGrid categories={menuData.categories} />
