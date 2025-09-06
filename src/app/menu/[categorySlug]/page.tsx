@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import { headers } from "next/headers";
-import { Header } from '@/components/menu/Header';
 import { CategoryNavigation } from '@/components/menu/CategoryNavigation';
 import { ProductPreviewCard } from '@/components/products/ProductPreviewCard';
 import { ExpandableProductCard } from '@/components/products/ExpandableProductCard';
@@ -16,10 +15,8 @@ async function getFullMenu(): Promise<MenuResponse | null> {
         const proto = h.get("x-forwarded-proto") ?? "http";
         const host = h.get("x-forwarded-host") ?? h.get("host");
 
-        // Prod’da .env’den ver; yoksa gelen isteğin origin’ini kullan
         const base = process.env.NEXT_PUBLIC_SITE_URL ?? `${proto}://${host}`;
 
-        // Relative yerine ABSOLUTE URL: kendi siten + rewrite/proxy path
         const url = `${base}/api/v1/public/menus/${CAFE_SLUG}/menu`;
 
         const res = await fetch(url, { cache: "no-store" });
@@ -64,8 +61,6 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            <Header />
-
             <CategoryNavigation categories={menuData.categories} currentCafeSlug={CAFE_SLUG} />
 
             <main className="w-full max-w-5xl mx-auto p-4 sm:p-6">

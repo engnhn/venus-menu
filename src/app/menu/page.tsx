@@ -63,8 +63,6 @@ export default function MenuPage() {
 
     return (
         <div className="bg-white text-zinc-900 min-h-screen font-sans">
-            <Header />
-
             <main className="p-4">
                 <CategoryGrid categories={menuData.categories} />
             </main>

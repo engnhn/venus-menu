@@ -1,23 +1,16 @@
-// app/menu/layout.tsx
+import {Header} from "@/components/menu/Header";
 
-import { Header } from '@/components/menu/Header';
-import {Footer} from "@/components/layout/Footer";
-
-// Bu layout, children prop'u aracılığıyla sayfa içeriklerini alacak.
-export default function MenuLayout({
-                                       children,
-                                   }: {
+export default async function MenuLayout({
+                                             children,
+                                         }: {
     children: React.ReactNode;
 }) {
     return (
-        <div className="min-h-screen flex justify-center items-start p-4">
-
-            <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden relative">
-
-
+        <div className="bg-slate-50 min-h-screen">
+            <div className="w-full max-w-4xl mx-auto px-4 py-8">
                 <main>
+                    <Header />
                     {children}
-                    <Footer />
                 </main>
             </div>
         </div>
